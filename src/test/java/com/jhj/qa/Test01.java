@@ -60,4 +60,12 @@ public class Test01 {
 		}
 		
 	}
+	
+	@Test
+	@DisplayName("제목으로 조회된 글 번호가 3인지 테스트")
+	public void testJpa4() {
+		Question question = questionRepository.findBySubject("sbb가 무엇인가요?");
+		assertEquals(3, question.getId());
+		
+	}
 }
