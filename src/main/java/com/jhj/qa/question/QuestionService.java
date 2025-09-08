@@ -1,5 +1,6 @@
 package com.jhj.qa.question;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,5 +32,13 @@ public class QuestionService {
 			throw new DataNotFoundException("question not found");
 		}
 		
+	}
+	
+	public void create(String subject, String content) {
+		Question question = new Question();
+		question.setSubject(subject);
+		question.setContent(content);
+		question.setCreatedate(LocalDateTime.now());
+		questionRepository.save(question);
 	}
 }

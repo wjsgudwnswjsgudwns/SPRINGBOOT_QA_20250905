@@ -5,9 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.validation.Valid;
 
 @RequestMapping("/question") //prefix(접두사)
 @Controller
@@ -43,5 +48,30 @@ public class QuestionController {
 		model.addAttribute("question", question);
 		return "question_detail"; //타임리프 html의 이름
 	}
+	
+	@GetMapping(value = "/create")
+	public String questionCreate(QuestionForm questionForm) {
+			
+		return "question_form"; // 질문 등록하는 폼 페이지
+	}
+	
+//	@PostMapping(value = "/create") // 질문 내용을 DB에 저장하는 메소드
+//	public String questionCreate(@RequestParam(value =  "subject") String subject, @RequestParam(value = "content") String content) {
+//		questionService.create(subject, content);
+//		
+//		return "redirect:/question/list";
+//	}
+	
+	@PostMapping(value = "/create") // 질문 내용을 DB에 저장하는 메소드(with validation)
+	public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) { // 참이면 에러 발생 -> 유효성 체크
+			return "question_form"; // 에러 발생시 다시 질문 등록 폼으로 이동
+		}
+		questionService.create(questionForm.getSubject(), questionForm.getContent());
+		
+		return "redirect:/question/list";
+	}
+	
 	
 }
