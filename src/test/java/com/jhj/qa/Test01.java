@@ -65,7 +65,21 @@ public class Test01 {
 	@DisplayName("제목으로 조회된 글 번호가 3인지 테스트")
 	public void testJpa4() {
 		Question question = questionRepository.findBySubject("sbb가 무엇인가요?");
+		assertEquals(3, question.getId());	
+	}
+	
+	@Test
+	@DisplayName("제목과 내용 조회된 글 번호가 3인지 테스트")
+	public void testJpa5() {
+		Question question = questionRepository.findBySubjectAndContent("sbb가 무엇인가요?","sbb에 대해 알고 싶습니다.");
 		assertEquals(3, question.getId());
-		
+	}
+	
+	@Test
+	@DisplayName("제목에 특정 단어가 포함되어 있는 글 조회")
+	public void testJpa6() {
+		List<Question> questionList = questionRepository.findBySubjectLike("sbb%");
+		Question question = questionList.get(0);
+		assertEquals("sbb가 무엇인가요?", question.getSubject());
 	}
 }
