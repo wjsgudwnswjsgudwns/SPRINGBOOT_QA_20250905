@@ -1,8 +1,8 @@
-package com.jhj.qa.entity;
+package com.jhj.qa.answer;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.annotations.CreationTimestamp;
+import com.jhj.qa.question.Question;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
