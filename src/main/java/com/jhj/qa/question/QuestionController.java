@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jhj.qa.answer.AnswerForm;
+
 import jakarta.validation.Valid;
 
 @RequestMapping("/question") //prefix(접두사)
@@ -41,7 +43,7 @@ public class QuestionController {
 	}	
 	
 	@GetMapping(value = "/detail/{id}") //파라미터이름 없이 값만 넘어왔을때 처리
-	public String detail(Model model, @PathVariable("id") Integer id) {
+	public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
 		
 		//service에 3을 넣어서 호출
 		Question question = questionService.getQuestion(id);
