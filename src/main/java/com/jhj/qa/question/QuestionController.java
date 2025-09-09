@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -65,6 +66,7 @@ public class QuestionController {
 		return "question_detail"; //타임리프 html의 이름
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping(value = "/create")
 	public String questionCreate(QuestionForm questionForm) {
 			
@@ -77,7 +79,7 @@ public class QuestionController {
 //		
 //		return "redirect:/question/list";
 //	}
-	
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping(value = "/create") // 질문 내용을 DB에 저장하는 메소드(with validation)
 	public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
 		
