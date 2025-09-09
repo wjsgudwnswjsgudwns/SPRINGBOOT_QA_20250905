@@ -1,5 +1,6 @@
 package com.jhj.qa.question;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jhj.qa.answer.AnswerForm;
+import com.jhj.qa.user.SiteUser;
+import com.jhj.qa.user.UserService;
 
 import jakarta.validation.Valid;
 
@@ -26,6 +29,9 @@ public class QuestionController {
 	
 	@Autowired
 	private QuestionService questionService;
+	
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping(value = "/list")
 	//@ResponseBody
@@ -73,12 +79,14 @@ public class QuestionController {
 //	}
 	
 	@PostMapping(value = "/create") // 질문 내용을 DB에 저장하는 메소드(with validation)
-	public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) {
+	public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
 		
 		if(bindingResult.hasErrors()) { // 참이면 에러 발생 -> 유효성 체크
 			return "question_form"; // 에러 발생시 다시 질문 등록 폼으로 이동
 		}
-		questionService.create(questionForm.getSubject(), questionForm.getContent());
+		SiteUser siteUser = userService.getUser(principal.getName());
+		
+		questionService.create(questionForm.getSubject(), questionForm.getContent(), siteUser);
 		
 		return "redirect:/question/list";
 	}

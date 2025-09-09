@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.jhj.qa.answer.Answer;
+import com.jhj.qa.user.SiteUser;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -11,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -48,4 +50,7 @@ public class Question {
 	// 1:N 관계 -> 질문 : 답변들
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE) // 질문글이 삭제되면 질문글에 달린 답변글도 같이 사라져줘야함.
 	private List<Answer> answerList;
+	
+	@ManyToOne
+	private SiteUser author;
 }

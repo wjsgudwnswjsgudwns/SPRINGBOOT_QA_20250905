@@ -1,8 +1,12 @@
 package com.jhj.qa.user;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.jhj.qa.DataNotFoundException;
 
 @Service
 public class UserService {
@@ -12,6 +16,7 @@ public class UserService {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
 	
 	// 회원 가입
 	public SiteUser create(String username, String password, String email) {
@@ -28,4 +33,17 @@ public class UserService {
 		
 		return user;
 	}
+	
+	//유저 가져오기
+	public SiteUser getUser(String username) {
+		Optional<SiteUser> siteUser = userRepository.findByUsername(username);
+		if(siteUser.isPresent()) {
+			SiteUser _siteUser = siteUser.get();
+			return _siteUser;
+		} else {
+			throw new DataNotFoundException("존재하지 않는 유저입니다");
+		}
+	}
+	
+	
 }
