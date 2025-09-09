@@ -55,6 +55,14 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	@GetMapping(value = "/login")
+	public String login() {
+		return "login_form";
+	}
 	
+//	@PostMapping(value = "/login")
+//	public String login() {
+//		return "login_form";
+//	}
 	
 }
