@@ -28,7 +28,7 @@
 	
 	<!-- 답변 등록 -->
 	<form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
-		<!-- 유효성 체크 -->
+		<!-- 유효성 체크 에러 표시 -->
 		<div th:replace="~{form_errors :: formErrorsFragment}"></div>
 	
 		<textarea rows="15" cols="40" th:field="*{content}" class="form-control"></textarea>
