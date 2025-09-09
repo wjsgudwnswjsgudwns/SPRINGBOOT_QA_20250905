@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.jhj.qa.DataNotFoundException;
@@ -22,6 +25,12 @@ public class QuestionService {
 	public List<Question> getList() { //모든 질문글 가져오기
 		return questionRepository.findAll();
 	}
+	
+//	public Page<Question> getList(int page) { //모든 질문글 가져오기 -> 페이징
+//		Pageable pageable = PageRequest.of(page, 10); // 한페이지당 10개씩 표시
+//		
+//		return questionRepository.findAll(pageable);
+//	}
 	
 	public Question getQuestion(Integer id) {
 		Optional<Question> qOptional = questionRepository.findById(id);

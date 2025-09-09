@@ -3,6 +3,7 @@ package com.jhj.qa.question;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,6 +42,18 @@ public class QuestionController {
 		
 		return "question_list";
 	}	
+	
+//	@GetMapping(value = "/list")
+//	//@ResponseBody
+//	public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+//		
+//		//List<Question> questionList = questionRepository.findAll(); //모든 질문글 불러오기
+//		Page<Question> paging = questionService.getList(page); // 게시글 10개씩 자른 리스트
+//		model.addAttribute("paging", paging);
+//		
+//		return "question_list";
+//	}	
+	
 	
 	@GetMapping(value = "/detail/{id}") //파라미터이름 없이 값만 넘어왔을때 처리
 	public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
