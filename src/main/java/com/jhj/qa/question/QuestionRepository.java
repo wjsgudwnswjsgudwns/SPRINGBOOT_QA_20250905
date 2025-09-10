@@ -17,4 +17,5 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 	
 	//페이징 관련
 	//public Page<Question> findAll(Pageable pageable);
+	
 }
