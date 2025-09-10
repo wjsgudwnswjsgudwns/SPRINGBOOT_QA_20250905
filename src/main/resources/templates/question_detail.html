@@ -22,8 +22,8 @@
 				th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
 				th:text="수정">수정</a>
 				<!-- 삭제버튼 -->
-				<a href="javascriot:void(0);" 
-				th:data-uri="@{|/question/detele/${question.id}|}" class="delete btn btn-sm btn-outline-secondary" 
+				<a href="javascript:void(0);" 
+				th:data-uri="@{|/question/delete/${question.id}|}" class="delete btn btn-sm btn-outline-secondary" 
 				sec:authorize="isAuthenticated()" 
 				th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
 				th:text="삭제">삭제</a>
@@ -49,6 +49,21 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="my-3">
+				<!-- 답변 수정 버튼 -->
+				<a th:href="@{|/answer/modify/${answer.id}|}" class="btn btn-sm btn-outline-secondary" 
+				sec:authorize="isAuthenticated()" 
+				th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
+				th:text="수정">수정</a>
+				<!-- 답변 삭제 버튼 -->
+				<a href="javascript:void(0);" 
+				th:data-uri="@{|/answer/delete/${answer.id}|}" class="delete btn btn-sm btn-outline-secondary" 
+				sec:authorize="isAuthenticated()" 
+				th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
+				th:text="삭제">삭제</a>
+			</div>
+			
 		</div>
 	</div>
 	

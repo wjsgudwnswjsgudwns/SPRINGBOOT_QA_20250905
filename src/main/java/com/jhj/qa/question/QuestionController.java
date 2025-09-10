@@ -134,7 +134,7 @@ public class QuestionController {
 	}
 	
 	@PreAuthorize("isAuthenticated()")
-	@PostMapping(value = "/delete/{id}")
+	@GetMapping(value = "/delete/{id}")
 	public String questionDelete(@PathVariable("id") Integer id, Principal principal) {
 		Question question = questionService.getQuestion(id); // id로 객체 가져오기
 		
