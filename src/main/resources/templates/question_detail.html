@@ -16,11 +16,19 @@
 			</div>
 			
 			<div class="my-3">
-				<a th:href="@{|/question/modify/${question.id}|}" class="btn btn-sm 	btn-outline-secondary" 
+				<!-- 수정 버튼 -->
+				<a th:href="@{|/question/modify/${question.id}|}" class="btn btn-sm btn-outline-secondary" 
 				sec:authorize="isAuthenticated()" 
 				th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
 				th:text="수정">수정</a>
+				<!-- 삭제버튼 -->
+				<a href="javascriot:void(0);" 
+				th:data-uri="@{|/question/detele/${question.id}|}" class="delete btn btn-sm btn-outline-secondary" 
+				sec:authorize="isAuthenticated()" 
+				th:if="${question.author != null and #authentication.getPrincipal().getUsername() == question.author.username}"
+				th:text="삭제">삭제</a>
 			</div>
+			
 			
 		</div>
 	</div>
@@ -57,4 +65,16 @@
 	</form>
 	</div>
 
+	<!-- 자바스크립트 작성 -->
+	<script type="text/javascript" layout:fragment="script">
+	const delete_elements = document.getElementsByClassName("delete");
+		Array.from(delete_elements).forEach(function (element) {
+			element.addEventListener('click', function () {
+				if (confirm("정말로 삭제하시겠습니까?")) {
+				location.href = this.dataset.uri;
+			};
+		});
+	});
+
+</script>
 </html>

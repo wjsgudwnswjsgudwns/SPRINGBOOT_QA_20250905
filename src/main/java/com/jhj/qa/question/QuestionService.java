@@ -52,4 +52,16 @@ public class QuestionService {
 		question.setAuthor(user);
 		questionRepository.save(question);
 	}
+	
+	public void modify(Question question, String subject, String content) {
+		question.setSubject(subject); // 새로운 제목
+		question.setContent(content); // 새로운 내용
+		question.setModifydate(LocalDateTime.now()); // 수정일
+		
+		questionRepository.save(question); // 수정
+	}
+	
+	public void delete(Question question) {
+		questionRepository.delete(question);
+	}
 }
