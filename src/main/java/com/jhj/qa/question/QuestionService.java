@@ -70,5 +70,9 @@ public class QuestionService {
 		questionRepository.save(question);
 	}
 	
+	public void hit(Question question) {
+		question.setHit(question.getHit() + 1);
+		questionRepository.save(question);
+	}
 	
 }
