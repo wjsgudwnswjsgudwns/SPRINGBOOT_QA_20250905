@@ -1,6 +1,7 @@
 package com.jhj.qa.answer;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import com.jhj.qa.question.Question;
 import com.jhj.qa.user.SiteUser;
@@ -10,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -43,10 +45,14 @@ public class Answer {
 	
 	@ManyToOne
 	private Question question;
-	// N:1 관계 -> 답변:질문
+	// N:1 관계 -> 답변:질문	
 	
 	@ManyToOne
 	private SiteUser author;
 	
 	private LocalDateTime modifydate; // 답변글 수정일
+	
+	// 질문:추천
+	@ManyToMany
+	Set<SiteUser> voter; // 추천한 유저가 중복 없이 저장 -> 유저수 -> 추천수
 }

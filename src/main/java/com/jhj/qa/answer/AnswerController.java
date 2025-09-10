@@ -114,4 +114,15 @@ public class AnswerController {
 		answerService.delete(answer);
 		return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
     }
+    
+    @PreAuthorize("isAuthenticated()")
+	@GetMapping(value = "/vote/{id}")
+	public String vote(@PathVariable("id") Integer id, Principal principal) {
+		Answer answer = answerService.getAnswer(id);
+		SiteUser siteUser = userService.getUser(principal.getName());
+		//로그인한 유저의 아이디로 유저 엔티티 조회하기
+		
+		answerService.vote(answer, siteUser);
+		return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
+	}
 }

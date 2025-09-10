@@ -2,6 +2,7 @@ package com.jhj.qa.question;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import com.jhj.qa.answer.Answer;
 import com.jhj.qa.user.SiteUser;
@@ -12,6 +13,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
@@ -55,4 +57,9 @@ public class Question {
 	private SiteUser author;
 	
 	private LocalDateTime modifydate; // 게시글 수정일
+	
+	// 질문:추천
+	@ManyToMany
+	Set<SiteUser> voter; // 추천한 유저가 중복 없이 저장 -> 유저수 -> 추천수
+	//Set ->중복 제거용 컬렉션 사용 -> 유저 한명당 추천수 1개만 기록하기 위해
 }
