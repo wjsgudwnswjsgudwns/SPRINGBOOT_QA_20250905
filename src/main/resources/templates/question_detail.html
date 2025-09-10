@@ -34,7 +34,8 @@
 		<textarea sec:authorize="isAnonymous()" disabled rows="10" cols="40" th:field="*{content}" class="form-control"></textarea>
 		<textarea sec:authorize="isAuthenticated()" rows="10" cols="40" th:field="*{content}" class="form-control"></textarea>
 		
-		<input type="submit" value="답변 등록" class="btn btn-primary my-2">
+		<input sec:authorize="isAnonymous()" disabled type="submit" value="답변 등록" class="btn btn-primary my-2">
+		<input sec:authorize="isAuthenticated()" type="submit" value="답변 등록" class="btn btn-primary my-2">
 	</form>
 	</div>
 
