@@ -55,4 +55,7 @@ public class Answer {
 	// 질문:추천
 	@ManyToMany
 	Set<SiteUser> voter; // 추천한 유저가 중복 없이 저장 -> 유저수 -> 추천수
+	
+	@ManyToMany
+	Set<SiteUser> disvoter;
 }

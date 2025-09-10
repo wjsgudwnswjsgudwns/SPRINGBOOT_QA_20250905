@@ -125,4 +125,15 @@ public class AnswerController {
 		answerService.vote(answer, siteUser);
 		return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
 	}
+    
+    @PreAuthorize("isAuthenticated()")
+	@GetMapping(value = "/disvote/{id}")
+	public String disvote(@PathVariable("id") Integer id, Principal principal) {
+		Answer answer = answerService.getAnswer(id);
+		SiteUser siteUser = userService.getUser(principal.getName());
+		//로그인한 유저의 아이디로 유저 엔티티 조회하기
+		
+		answerService.disvote(answer, siteUser);
+		return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
+	}
 }

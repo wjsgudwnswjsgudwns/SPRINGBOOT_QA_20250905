@@ -157,7 +157,20 @@ public class QuestionController {
 		SiteUser siteUser = userService.getUser(principal.getName());
 		//로그인한 유저의 아이디로 유저 엔티티 조회하기
 		
+		
 		questionService.vote(question, siteUser);
+		return String.format("redirect:/question/detail/%s", id);
+	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping(value = "/disvote/{id}")
+	public String disvote(@PathVariable("id") Integer id, Principal principal) {
+		Question question = questionService.getQuestion(id);
+		SiteUser siteUser = userService.getUser(principal.getName());
+		//로그인한 유저의 아이디로 유저 엔티티 조회하기
+		
+		
+		questionService.disvote(question, siteUser);
 		return String.format("redirect:/question/detail/%s", id);
 	}
 	

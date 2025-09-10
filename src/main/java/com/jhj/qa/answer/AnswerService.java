@@ -51,4 +51,10 @@ public class AnswerService {
 		
 		answerRepository.save(answer);
 	}
+	
+	public void disvote(Answer answer, SiteUser siteUser) {
+		answer.getDisvoter().add(siteUser);
+		
+		answerRepository.save(answer);
+	}
 }

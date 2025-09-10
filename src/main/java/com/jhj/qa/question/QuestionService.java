@@ -75,4 +75,9 @@ public class QuestionService {
 		questionRepository.save(question);
 	}
 	
+	public void disvote(Question question, SiteUser siteUser) {
+		question.getDisvoter().add(siteUser);
+		questionRepository.save(question);
+	}
+	
 }
