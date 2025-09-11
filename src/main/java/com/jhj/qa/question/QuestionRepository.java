@@ -23,4 +23,15 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 //			value = "UPDATE question SET hit=hit+1 WHERE id = :id"
 //			)
 //	public void updateHit(@Param("id") Integer id);
+	
+	@Query(
+	         value = "SELECT * FROM ( " +
+	                 " SELECT q.*, ROWNUM rnum FROM ( " +
+	                 "   SELECT * FROM question ORDER BY createdate DESC " +
+	                 " ) q WHERE ROWNUM <= :endRow " +
+	                 ") WHERE rnum > :startRow",
+	         nativeQuery = true)
+	    List<Question> findQuestionsWithPaging(@Param("startRow") int startRow,
+	                                           @Param("endRow") int endRow);
+	
 }

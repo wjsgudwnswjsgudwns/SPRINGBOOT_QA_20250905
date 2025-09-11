@@ -36,27 +36,25 @@ public class QuestionController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping(value = "/list")
-	//@ResponseBody
-	public String list(Model model) {
-		
-		//List<Question> questionList = questionRepository.findAll(); //모든 질문글 불러오기
-		List<Question> questionList = questionService.getList();
-		model.addAttribute("questionList", questionList);
-		
-		return "question_list";
-	}	
-	
 //	@GetMapping(value = "/list")
 //	//@ResponseBody
-//	public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+//	public String list(Model model) {
 //		
 //		//List<Question> questionList = questionRepository.findAll(); //모든 질문글 불러오기
-//		Page<Question> paging = questionService.getList(page); // 게시글 10개씩 자른 리스트
-//		model.addAttribute("paging", paging);
+//		List<Question> questionList = questionService.getList();
+//		model.addAttribute("questionList", questionList);
 //		
 //		return "question_list";
 //	}	
+	
+	@GetMapping(value = "/list")
+	public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+		
+		Page<Question> paging = questionService.getPageQuestion(page);
+		model.addAttribute("paging", paging);
+		
+		return "question_list";
+	}	
 	
 	
 	@GetMapping(value = "/detail/{id}") //파라미터이름 없이 값만 넘어왔을때 처리
