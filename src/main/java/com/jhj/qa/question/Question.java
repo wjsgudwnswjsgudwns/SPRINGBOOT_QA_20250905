@@ -66,5 +66,5 @@ public class Question {
 	@ManyToMany
 	Set<SiteUser> disvoter; // 비추천한 유저가 중복 없이 저장 -> 유저수 -> 비추천수
 	
-	private Integer hit;
+	private Integer hit=0;
 }
