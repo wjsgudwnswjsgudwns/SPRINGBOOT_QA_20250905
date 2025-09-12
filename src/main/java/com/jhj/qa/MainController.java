@@ -11,7 +11,7 @@ public class MainController {
 //		return "redirect:/question/list";
 //	}
 	
-	@GetMapping(value = "/jboard") // cloud root 요청 처리
+	@GetMapping(value = "/") // cloud root 요청 처리
 	public String root() {
 		return "redirect:/question/list";
 	}
